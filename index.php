@@ -1,5 +1,4 @@
 <?php
-
 require_once('init.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -8,20 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $f->save();
 }
 
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>registration</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<?php
-include 'form.php'
-?>
-
-</body>
-</html>
+$tmp_name = 'form_tmp.tpl';
+$view = new View();
+$data = [
+];
+$view->create($tmp_name, $data);
