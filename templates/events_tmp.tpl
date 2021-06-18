@@ -1,13 +1,33 @@
 <!DOCTYPE html>
-<html class="has-background-dark" lang="ru">
+<html class="" lang="ru">
 <head>
     <meta charset="utf-8">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
 
     <title>Календарь</title>
+
 </head>
 <body >
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="index.php">
+            <h1 class="is-size-4">Календарь</h1>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item is-size-5" href="index.php">
+                Создать событие
+            </a>
+
+            <a class="navbar-item is-size-5" href="events.php">
+                Просмотр событий
+            </a>
+        </div>
+    </div>
+</nav>
 
 <div class="container mt-4 is-justify-content-space-around box">
     <div>
@@ -29,6 +49,6 @@
     </div>
 
 </div>
-
+<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 </body>
 </html>

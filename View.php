@@ -10,7 +10,8 @@ class View
         require_once self::$template_dir . $path;
         $template = ob_get_clean();
         ob_end_clean();
-//        var_dump($vars);
+        echo "<br>";
+
         foreach ($vars as $key => $value) {
             $$key = $value;
         }
@@ -44,13 +45,12 @@ class View
             }
         }
 
-
-        // Variables
         preg_match_all('/\{(.*?)\}/i', $template, $regs, PREG_SET_ORDER);
-        for ($i = 0; $i < count($regs[0]); $i++){
+        for ($i = 0; $i < count($regs); $i++){
+
             $varname = $regs[$i][1];
             if (isset($vars[$varname])) {
-                $template = str_replace($regs[$i][0],$vars[$varname], $template);
+                $template = str_replace($regs[$i][0], $vars[$varname], $template);
             } else {
                 $template = str_replace($regs[$i][0],'', $template);
             }

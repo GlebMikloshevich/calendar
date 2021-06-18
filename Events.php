@@ -27,7 +27,7 @@ class Events
             header("Location:login.php");
         } else {
 
-            $query = 'SELECT * FROM `events` WHERE `user_id` = :login';
+            $query = 'SELECT * FROM `events` WHERE `user_id` = :login and `deleted_at` is NULL';
             if (array_key_exists('date', $conditions)) {
                 $query .= ' and ' . self::$date[$conditions['date']];
             }
@@ -46,7 +46,8 @@ class Events
 
             $find_sql->execute();
 //            $find_sql->debugDumpParams();
-
+//            $find_sql->debugDumpParams();
+//            exit();
             $found_values = $find_sql->fetchAll();
 //            var_dump($found_values);
 
@@ -72,15 +73,33 @@ class Events
         $table .= '<tr>';
         foreach ($attributes as $attr) {
             $table .= '<th><p>';
-            $table .= $attr;
+            $table .= CalendarEvent::$rus_attributes[$attr];
             $table .= '</p></th>';
         }
+        $table .= '<th><p>';
+        $table .= 'Завершить';
+        $table .= '</p></th>';
+        $table .= '<th><p>';
+        $table .= 'Редактировать';
+        $table .= '</p></th>';
+        $table .= '<th><p>';
+        $table .= 'Удалить';
+        $table .= '</p></th>';
+
         $table .= '</tr>';
         $table .= '</thead>';
 
         //content
 //        var_dump($this->events);
         foreach ($this->events as $event) {
+//            var_dump($event);
+//            echo "<br>";
+//            echo $event->get_id();
+//            echo "<br>";
+//            echo "<br>";
+//            echo "<br>";
+
+
             $table .= '<tr>';
             $data = $event->getData();
             echo "<br><br>";
@@ -89,9 +108,33 @@ class Events
                 $table .= $data[$attr];
                 $table .= '</td>';
             }
-                $table .= '</tr>';
-        }
 
+
+
+            //finish
+            $table .= '<td>';
+
+            $table .= '<form action="event_actions.php" method="post">
+                        <button class="button" name="check"  value="' . $event->get_id() .'"><ion-icon size="small" name="checkmark"></ion-icon></button>
+                        </form>';
+            $table .= '</td>';
+
+            //edit
+            $table .= '<td>';
+            $table .= '<form action="event_actions.php" method="post">
+                       <button class="button " name="edit" value="' . $event->get_id() . '"><ion-icon size="small" name="pencil"></ion-icon></button>
+                        </form>';
+            $table .= '</td>';
+
+            //delete
+            $table .= '<td>';
+            $table .= '<form action="event_actions.php" method="post">
+                        <button class="button " name="delete" value="' .$event->get_id(). '"><ion-icon size="small" name="close"></ion-icon></button>                
+                        </form>';
+            $table .= '</td>';
+
+            $table .= '</tr>';
+        }
         $table .= '</table>';
         return $table;
     }

@@ -26,7 +26,7 @@ class Session {
 
         $value = null;
 
-        if ( ! empty($_SESSION[$key]))
+        if (! empty($_SESSION[$key]))
         {
             $value = $_SESSION[$key];
         }
@@ -38,7 +38,7 @@ class Session {
     {
         static::start_session();
 
-        if ( ! empty($_SESSION[$key]))
+        if (! empty($_SESSION[$key]))
         {
             unset($_SESSION[$key]);
         }
